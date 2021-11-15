@@ -43,31 +43,36 @@ class DishDetail extends Component {
     }
 
     render() {
-            const selectedDish = this.props.selectedDish;
+            const selectedDish = this.props.dish;
+            console.log(selectedDish);
 
-            return (
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12 col-md-5 m-1">
-                            <Card>
-                                <CardImg width="100%" src={selectedDish.image} alt={selectedDish.name} />
-                                <CardBody>
-                                    <CardTitle>{selectedDish.name}</CardTitle>
-                                    <CardText>{selectedDish.description}</CardText>
-                                </CardBody>
-                            </Card>
-                        </div>
-                        <div className="col-12 col-md-5 m-1">
-                            <h4>Comments</h4>
-                            <div>
-                                {this.renderComments(selectedDish.comments)}
+            if (selectedDish != null) {
+                return (
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-12 col-md-5 m-1">
+                                <Card>
+                                    <CardImg width="100%" src={selectedDish.image} alt={selectedDish.name} />
+                                    <CardBody>
+                                        <CardTitle>{selectedDish.name}</CardTitle>
+                                        <CardText>{selectedDish.description}</CardText>
+                                    </CardBody>
+                                </Card>
+                            </div>
+                            <div className="col-12 col-md-5 m-1">
+                                <h4>Comments</h4>
+                                <div>
+                                    {this.renderComments(selectedDish.comments)}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            );
+                );
+            }
+            else {
+                return(<div></div>);
+            }
     }
-
 }
 
 export default DishDetail;
