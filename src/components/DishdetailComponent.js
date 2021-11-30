@@ -20,7 +20,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
         );
     }
 
-    function RenderComments({comments}) {
+    function RenderComments({comments, dishId, addComment}) {
         if (comments != null) {
             var formatedComments = [];
             for (var i=0;i<comments.length;i++) {
@@ -29,7 +29,9 @@ const minLength = (len) => (val) => val && (val.length >= len);
             return(
                 <ul className="list-unstyled">
                     {formatedComments}
+                    <CommentForm dishId={dishId} addComment={addComment}/>
                 </ul>
+                
             );
         }
         else {
@@ -70,10 +72,10 @@ const minLength = (len) => (val) => val && (val.length >= len);
                             <div className="col-12 col-md-5 m-1">
                                 <h4>Comments</h4>
                                 <div>
-                                    <RenderComments comments = {props.comments} />
+                                    <RenderComments comments = {props.comments} dishId={props.dish.id} addComment={props.addComment}/>
                                 </div>
                                 <div>
-                                    <CommentForm />
+                                    {/* <CommentForm dish={props.dishId} addComment={props.addComment}/> */}
                                 </div>
                             </div>
                         </div>
@@ -104,8 +106,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
         }
         
         handleSubmit(values) {
-            console.log("Current State is: " + JSON.stringify(values));
-            alert("Current State is: " + JSON.stringify(values));
+            this.props.addComment(this.props.dishId, values.rating, values.username, values.comment);
         }
 
         render() {
