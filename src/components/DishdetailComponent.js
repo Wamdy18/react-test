@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger} from 'react-animation-components';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -15,10 +16,12 @@ const minLength = (len) => (val) => val && (val.length >= len);
         const commentFormatedDate = commentDate.toLocaleString('eng', { month: 'short', day: '2-digit', year: "numeric"});
 
         return(
+            <Fade in>
             <li className="list-unstyled">
                 <p>{comment.comment}</p>
                 <p>-- {comment.author}, {commentFormatedDate}</p>
             </li>
+            </Fade>
         );
     }
 
@@ -30,7 +33,9 @@ const minLength = (len) => (val) => val && (val.length >= len);
             }
             return(
                 <ul className="list-unstyled">
+                    <Stagger in>
                     {formatedComments}
+                    </Stagger>
                     <CommentForm dishId={dishId} postComment={postComment}/>
                 </ul>
                 
@@ -81,13 +86,18 @@ const minLength = (len) => (val) => val && (val.length >= len);
                         </div>
                         <div className="row">
                             <div className="col-12 col-md-5 m-1">
-                                <Card>
-                                    <CardImg width="100%" src={baseUrl + selectedDish.image} alt={selectedDish.name} />
-                                    <CardBody>
-                                        <CardTitle>{selectedDish.name}</CardTitle>
-                                        <CardText>{selectedDish.description}</CardText>
-                                    </CardBody>
-                                </Card>
+                                <FadeTransform in
+                                transformProps={{
+                                    exitTransform: 'scale(0.5) transateY(-50%)'
+                                }}>
+                                    <Card>
+                                        <CardImg width="100%" src={baseUrl + selectedDish.image} alt={selectedDish.name} />
+                                        <CardBody>
+                                            <CardTitle>{selectedDish.name}</CardTitle>
+                                            <CardText>{selectedDish.description}</CardText>
+                                        </CardBody>
+                                    </Card>
+                                </FadeTransform>
                             </div>
                             <div className="col-12 col-md-5 m-1">
                                 <h4>Comments</h4>
