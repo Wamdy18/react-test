@@ -22,7 +22,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
         );
     }
 
-    function RenderComments({comments, dishId, addComment}) {
+    function RenderComments({comments, dishId, postComment}) {
         if (comments != null) {
             var formatedComments = [];
             for (var i=0;i<comments.length;i++) {
@@ -31,7 +31,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
             return(
                 <ul className="list-unstyled">
                     {formatedComments}
-                    <CommentForm dishId={dishId} addComment={addComment}/>
+                    <CommentForm dishId={dishId} postComment={postComment}/>
                 </ul>
                 
             );
@@ -92,7 +92,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
                             <div className="col-12 col-md-5 m-1">
                                 <h4>Comments</h4>
                                 <div>
-                                    <RenderComments comments = {props.comments} dishId={props.dish.id} addComment={props.addComment}/>
+                                    <RenderComments comments = {props.comments} dishId={props.dish.id} postComment={props.postComment}/>
                                 </div>
                                 <div>
                                     {/* <CommentForm dish={props.dishId} addComment={props.addComment}/> */}
@@ -126,7 +126,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
         }
         
         handleSubmit(values) {
-            this.props.addComment(this.props.dishId, values.rating, values.username, values.comment);
+            this.props.postComment(this.props.dishId, values.rating, values.username, values.comment);
         }
 
         render() {
