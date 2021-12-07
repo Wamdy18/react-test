@@ -4,6 +4,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle,
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -81,7 +82,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
                         <div className="row">
                             <div className="col-12 col-md-5 m-1">
                                 <Card>
-                                    <CardImg width="100%" src={selectedDish.image} alt={selectedDish.name} />
+                                    <CardImg width="100%" src={baseUrl + selectedDish.image} alt={selectedDish.name} />
                                     <CardBody>
                                         <CardTitle>{selectedDish.name}</CardTitle>
                                         <CardText>{selectedDish.description}</CardText>
